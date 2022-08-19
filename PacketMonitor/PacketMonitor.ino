@@ -1,4 +1,4 @@
-// Basic ESP8266 Packet Monitor Interface for the SH1106
+ynd// Basic ESP8266 Packet Monitor Interface for the SH1106
 // github.com/HakCat-Tech/ESP8266-Packet-Monitor
 
 #include "./esppl_functions.h"
@@ -108,21 +108,7 @@ void printPacket() { // function to print wifi packets to the screen
 }
 
 // check if button is pressed 
-void checkForPress() {
-  lState = digitalRead(ltBtn);
-  rState = digitalRead(rtBtn);
-  
-  if (lState == 0 && lState!=plState && filter>0) {filter--;}
-  else if (rState ==0 && rState!=prState && filter<2) {filter++;}
-  else if(lState == 0 && lState!=plState) {filter = 2;}
-  else if(rState ==0 && rState!=prState) {filter = 0;}
-  
-  plState = lState;
-  prState = rState;
-  
-  
-  
-}
+p
 
 
 void updateMenu() { // update scroll menu and packet type selection
@@ -134,15 +120,15 @@ void updateMenu() { // update scroll menu and packet type selection
   
   if (filter == 0) {
    display.drawString(55,54,"ALL");
-   pixels.setPixelColor(0, pixels.Color(0, 150, 0)); pixels.show();
+   pixels.setPixelColor(0, pixels.Color(0, 5, 0)); pixels.show();
   }
   else if (filter == 1) {
     display.drawString(42,54,"DEAUTH");
-    pixels.setPixelColor(0, pixels.Color(150, 0, 0)); pixels.show();
+    pixels.setPixelColor(0, pixels.Color(5, 0, 0)); pixels.show();
   }
   else {
     display.drawString(45,54,"PROBE");
-    pixels.setPixelColor(0, pixels.Color(0, 0, 150)); pixels.show();
+    pixels.setPixelColor(0, pixels.Color(0, 0, 5)); pixels.show();
   }
 }
 
@@ -170,12 +156,13 @@ void loop() {
         //
       }
     }
-    checkForPress();
+    checkForPress(); 
+    
     display.clear();
     updateMenu();
     printPacket();
     display.display();
-    //if (filter>0) delay(600); //dumb delay to display packets longer
+//    if (filter>0) delay(500); //dumb delay to display packets longer
     delay(0);
   }  
 }
